@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Buecherei.Models.Buch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bücher</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Neues Buch erstellen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Buchnummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sachgebiet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Erscheinungsjahr)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buchnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sachgebiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Erscheinungsjahr)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Buchnummer" class="btn btn-secondary">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
