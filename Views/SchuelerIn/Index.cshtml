@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Buecherei.Models.SchuelerIn>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>SchülerInnen</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">SchülerIn hinzufügen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ausweisnummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nachname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vorname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ausweisnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nachname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vorname)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Ausweisnummer" class="btn btn-secondary">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

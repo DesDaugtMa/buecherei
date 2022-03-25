@@ -1,0 +1,36 @@
+﻿@model Buecherei.Models.SchuelerIn
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SchülerIn</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ausweisnummer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ausweisnummer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nachname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nachname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vorname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vorname)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Ausweisnummer" class="btn btn-secondary">Bearbeiten</a>
+    <a asp-action="Index" class="btn btn-light">Back to List</a>
+</div>

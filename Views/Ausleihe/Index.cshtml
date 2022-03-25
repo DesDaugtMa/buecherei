@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Buecherei.Models.Ausleihe>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Liste ausgeliehener Bücher</h1>
+
+
+<form asp-controller="Ausleihe" asp-action="Index" class="form-inline">
+    <p>
+        <a asp-action="Create" class="btn btn-primary" style="margin-right: 5vh;">Neues Buch ausleihen</a>
+        <input class="form-control" type="text" name="SearchString" placeholder="Buchnummer suchen"/>
+        <input type="submit" value="Suchen" class="btn btn-info"/>
+        @if (ViewData["delFilter"].ToString() == "true") { 
+            <a asp-action="Index" class="btn btn-danger">Filter löschen</a>
+        }
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ausleihdatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Retourdatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Buch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchülerIn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ausleihdatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Retourdatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buch.Buchnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchülerIn.Nachname)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Zaehler" class="btn btn-secondary">Details</a>
+                @if (item.Retourdatum == null)
+                {
+                    <a asp-action="AddRetourDate" asp-route-id="@item.Zaehler" class="btn btn-success" style="color: white;">Buch zurückgebracht</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

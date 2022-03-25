@@ -1,0 +1,42 @@
+﻿@model Buecherei.Models.Ausleihe
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Ausgeliehenes Buch</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ausleihdatum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ausleihdatum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Retourdatum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Retourdatum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Buch)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Buch.Buchnummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SchülerIn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SchülerIn.Nachname)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Zaehler" class="btn btn-secondary">Bearbeiten</a>
+    <a asp-action="Index" class="btn btn-light">Zurück zur Liste</a>
+</div>

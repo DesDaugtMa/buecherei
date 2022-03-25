@@ -1,0 +1,82 @@
+﻿@model Buecherei.Models.Ausleihe
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Neues Buch ausleihen</h1>
+
+<hr />
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-sm-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label style="font-weight: 700;" asp-for="Buchnummer" class="control-label">Buchnummer</label>
+                <input id="bookNumber" onblur="searchBook(this.value)" asp-for="Buchnummer" class="form-control" asp-items="ViewBag.Buchnummer">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Autor</label>
+                <input class="form-control" id="bookAutor">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Titel</label>
+                <input class="form-control" id="bookTitel">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Sachgebiet</label>
+                <input class="form-control" id="bookSachgebiet">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ort</label>
+                <input class="form-control" id="bookOrt">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Erscheinungsjahr</label>
+                <input class="form-control" id="bookErscheinungsjahr">
+            </div>
+
+            <a class="btn btn-success" onclick="addAnotherBook()" style="color: white;">+ Weiteres Buch ausleihen</a>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label style="font-weight: 700;" asp-for="Ausweisnummer" class="control-label">Ausweisnummer</label>
+                <input id="studentNummer" onblur="searchStudent(this.value)" asp-for="Ausweisnummer" class="form-control" asp-items="ViewBag.Ausweisnummer">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nachname</label>
+                <input class="form-control" id="studentVorname">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Vorname</label>
+                <input class="form-control" id="studentNachname">
+            </div>
+            <div class="form-group">
+                <label style="font-weight: 700;" asp-for="Ausleihdatum" class="control-label"></label>
+                <input asp-for="Ausleihdatum" class="form-control" id="datePicker"/>
+                <span asp-validation-for="Ausleihdatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ausleihen" class="btn btn-primary" onclick="checkIfNew()" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<a class="btn btn-light" asp-action="Index">Zurück zur Liste</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@if (ViewData["ausweisnummer"].ToString() != "0" && !String.IsNullOrEmpty(ViewData["nachname"].ToString()) && !String.IsNullOrEmpty(ViewData["vorname"].ToString()))
+{
+    <script>
+        document.getElementById("studentNachname").value = "@ViewData["nachname"].ToString()";
+        document.getElementById("studentVorname").value = "@ViewData["vorname"].ToString()";
+        document.getElementById("datePicker").value = "@ViewData["datetime"]";
+    </script>
+}
