@@ -77,8 +77,22 @@ namespace Buecherei.Controllers
         }
 
         // GET: Ausleihe/Create
-        public IActionResult Create()
+        public IActionResult Create(int? ausweisnummer, string nachname, string vorname, string datetime)
         {
+            if (ausweisnummer != null && !String.IsNullOrEmpty(nachname) && !String.IsNullOrEmpty(vorname) && !String.IsNullOrEmpty(datetime))
+            {
+                ViewData["ausweisnummer"] = ausweisnummer.ToString();
+                ViewData["nachname"] = nachname;
+                ViewData["vorname"] = vorname;
+                ViewData["datetime"] = datetime;
+            } else
+            {
+                ViewData["ausweisnummer"] = "0";
+                ViewData["nachname"] = "";
+                ViewData["vorname"] = "";
+                ViewData["datetime"] = "";
+            }
+
             ViewData["Buchnummer"] = new SelectList(_context.Buch, "Buchnummer", "Buchnummer");
             ViewData["Ausweisnummer"] = new SelectList(_context.SchuelerIn, "Ausweisnummer", "Nachname");
             return View();
@@ -103,6 +117,20 @@ namespace Buecherei.Controllers
             ViewData["Buchnummer"] = new SelectList(_context.Buch, "Buchnummer", "Buchnummer", ausleihe.Buchnummer);
             ViewData["Ausweisnummer"] = new SelectList(_context.SchuelerIn, "Ausweisnummer", "Nachname", ausleihe.Ausweisnummer);
             return View(ausleihe);
+        }
+
+        public void CreateForJavascript([Bind("Zaehler,Buchnummer,Ausweisnummer,Ausleihdatum,Retourdatum")] Ausleihe ausleihe)
+        {
+
+            System.Threading.Thread.Sleep(1000);
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(ausleihe);
+                _context.SaveChangesAsync();
+            }
+            ViewData["Buchnummer"] = new SelectList(_context.Buch, "Buchnummer", "Buchnummer", ausleihe.Buchnummer);
+            ViewData["Ausweisnummer"] = new SelectList(_context.SchuelerIn, "Ausweisnummer", "Nachname", ausleihe.Ausweisnummer);
         }
 
         // GET: Ausleihe/Edit/5

@@ -127,3 +127,41 @@ function checkIfNew() {
 
     delay(1000).then(() => console.log('Waited 1 Second'));
 }
+
+function addAnotherBook() {
+
+    const ausleihe = {
+        Ausleihdatum: document.getElementById("datePicker").value,
+        Ausweisnummer: document.getElementById("studentNummer").value,
+        Buch: null,
+        Buchnummer: document.getElementById("bookNumber").value,
+        Retourdatum: null,
+        SchülerIn: null,
+        Zaehler: 0
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/Ausleihe/CreateForJavascript", // the URL of the controller action method
+        data: ausleihe, // optional data
+        success: function (result) {
+            
+        },
+        error: function (ex) {
+            console.log(ex);
+        }
+    });
+
+    document.getElementById("bookNumber").value = "";
+    document.getElementById("bookAutor").value = "";
+    document.getElementById("bookTitel").value = "";
+    document.getElementById("bookSachgebiet").value = "";
+    document.getElementById("bookOrt").value = "";
+    document.getElementById("bookErscheinungsjahr").value = "";
+
+    document.getElementById("bookAutor").disabled = false;
+    document.getElementById("bookTitel").disabled = false;
+    document.getElementById("bookSachgebiet").disabled = false;
+    document.getElementById("bookOrt").disabled = false;
+    document.getElementById("bookErscheinungsjahr").disabled = false;
+}
